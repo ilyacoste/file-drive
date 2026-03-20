@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: filedrive
+  datasource:
+    url: jdbc:postgresql://localhost:3033/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
