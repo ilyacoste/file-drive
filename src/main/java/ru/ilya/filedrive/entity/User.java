@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Table(name = "users")
 @Entity
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@With
 public class User implements UserDetails {
     public enum Authority {
         ROLE_USER,
@@ -41,14 +43,21 @@ public class User implements UserDetails {
             name="user_authorities",
             joinColumns = @JoinColumn(name = "user_id")
     )
+    @Column(name = "authority")
     private Set<String> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities.stream().map(SimpleGrantedAuthority::new).toList();
+        if (authorities == null) {
+            return Set.of();
+        }
+        return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
     }
 
     public boolean hasAuthority(Authority authority) {
+        if (authorities == null) {
+            return false;
+        }
         return authorities.contains(authority.name());
     }
 }

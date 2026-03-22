@@ -34,6 +34,12 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-security-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("org.apache.commons:commons-lang3:3.17.0")
+
+	testImplementation("org.mockito:mockito-core")
+	testImplementation("org.mockito:mockito-junit-jupiter")
+	testImplementation("org.assertj:assertj-core")
+	testRuntimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

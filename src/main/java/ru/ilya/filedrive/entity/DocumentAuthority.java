@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DocumentAuthority {
 
+    @Id
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "document_id", nullable = false)
     private Document document;
